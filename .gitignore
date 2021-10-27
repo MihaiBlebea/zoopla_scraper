@@ -1,0 +1,5 @@
+virtualenv
+__html_cache__
+__json_output__
+store.db
+scraper.log

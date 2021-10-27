@@ -1,0 +1,12 @@
+### Tasks
+	✔ Fetch all properties for a particular area and save them to json @done (26/10/2021, 12:42:59)
+		✔ Improve the task so it runs faster without timeouts @done (27/10/2021, 09:05:21)
+	✔ Change the json file name to include the timestamp when it was scraped @done (27/10/2021, 09:05:23)
+	☐ Create a daily cron to fetch same page per day
+	☐ Add the results to the database instead of json files (SQLite)
+	☐ Compare all the previous days and observe if there are any price differences up / down
+	☐ If there are any price differences send them to Telegram bot
+	☐ Send the link to the property in the telegram bot message
+	☐ Create an API server that can return:
+		☐ Houses added between 2 dates
+		☐ The price change for a particular house from the initial post till current day
