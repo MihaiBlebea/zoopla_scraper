@@ -1,3 +1,4 @@
+.env
 virtualenv
 __html_cache__
 __json_output__
