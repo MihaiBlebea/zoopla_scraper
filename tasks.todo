@@ -3,7 +3,7 @@
 		✔ Improve the task so it runs faster without timeouts @done (27/10/2021, 09:05:21)
 	✔ Change the json file name to include the timestamp when it was scraped @done (27/10/2021, 09:05:23)
 	☐ Create a daily cron to fetch same page per day
-	☐ Add the results to the database instead of json files (SQLite)
+	✔ Add the results to the database instead of json files (SQLite) @done (27/10/2021, 18:16:39)
 	☐ Compare all the previous days and observe if there are any price differences up / down
 	☐ If there are any price differences send them to Telegram bot
 	☐ Send the link to the property in the telegram bot message

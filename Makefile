@@ -12,3 +12,9 @@ venv-install-all:
 
 venv-install:
 	./virtualenv/bin/pip3 install $(package)
+
+api:
+	./virtualenv/bin/uvicorn src.api:app --reload
+
+db-refresh:
+	rm -rf ./store.db && sqlite3 store.db < ./init.sql

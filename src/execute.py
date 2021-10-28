@@ -7,6 +7,7 @@ import logging
 import math
 import argparse
 from pathlib import Path
+from dataclasses import dataclass
 
 from store import insert_listing
 from models import Listing
@@ -21,6 +22,18 @@ logging.basicConfig(
 BASE_URL = "https://www.zoopla.co.uk"
 CACHE_FOLDER = "__html_cache__"
 JSON_FOLDER = "__json_output__"
+
+@dataclass
+class Result:
+	id: str
+	price: int
+	title: str
+	url: str
+	bath_count: int
+	bedroom_count: int
+	reception_count: int
+	address: str
+	phone: str
 
 def main():
 	start_time = time.time()
@@ -59,22 +72,19 @@ def main():
 		result = extract_page_data(s, url, page)
 		results += result
 
-	Path(f"./{JSON_FOLDER}").mkdir(parents=True, exist_ok=True)
-	with open(f"./{JSON_FOLDER}/houses_{datetime.today().strftime('%b_%d_%Y')}.json", "w") as outfile:
-		json.dump(results, outfile)
-
 	for r in results:
 		listing = Listing(
-			r["id"],
-			r["price"],
-			r["title"],
-			r["url"],
-			r["bath_count"],
-			r["bedroom_count"],
-			r["reception_count"],
-			r["address"],
-			r["phone"],
+			r.id,
+			r.price,
+			r.title,
+			r.url,
+			r.bath_count,
+			r.bedroom_count,
+			r.reception_count,
+			r.address,
+			r.phone
 		)
+
 		insert_listing(listing)
 
 	print("Complete scraping")
@@ -109,18 +119,17 @@ def extract_page_data(s, url : str, page : int) -> list:
 	results = []
 	for c in listings:
 		url = fetch_urls(c)
-		results.append({
-			"id": extract_id_from_url(url),
-			"price": fetch_prices(c),
-			"title": fetch_titles(c),
-			"url": url,
-			"bath_count": fetch_baths(c),
-			"bedroom_count": fetch_bedrooms(c),
-			"reception_count": fetch_receptions(c),
-			"address": fetch_addresses(c),
-			"phone": fetch_phones(c),
-			"images": fetch_images(c),
-		})
+		results.append(Result(
+			extract_id_from_url(url),
+			fetch_prices(c),
+			fetch_titles(c),
+			url,
+			fetch_baths(c),
+			fetch_bedrooms(c),
+			fetch_receptions(c),
+			fetch_addresses(c),
+			fetch_phones(c),
+		))
 
 	return results
 
