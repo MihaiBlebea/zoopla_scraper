@@ -18,3 +18,9 @@ api:
 
 db-refresh:
 	rm -rf ./store.db && sqlite3 store.db < ./init.sql
+
+ansible-deploy:
+	ansible-playbook -i $$HOME/.ansible/inventory ./ansible/deploy_zoopla_scraper.yaml
+
+ansible-remove:
+	ansible-playbook -i $$HOME/.ansible/inventory ./ansible/remove_zoopla_scraper.yaml
