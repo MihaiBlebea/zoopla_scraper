@@ -20,7 +20,7 @@ docker-build:
 	docker build -t zoopla_scraper:v1.0 .
 
 docker-run:
-	docker run -d -v $(PWD)/store.db:/code/store.db --name scraper -p 80:80 zoopla_scraper:v1.0
+	docker run -d -v $(PWD)/store.db:/code/store.db --name scraper -p 8080:80 zoopla_scraper:v1.0
 
 docker: docker-build docker-run
 
