@@ -16,6 +16,17 @@ venv-install:
 api:
 	./virtualenv/bin/uvicorn src.api:app --reload
 
+docker-build:
+	docker build -t zoopla_scraper:v1.0 .
+
+docker-run:
+	docker run -d -v $(PWD)/store.db:/code/store.db --name scraper -p 80:80 zoopla_scraper:v1.0
+
+docker: docker-build docker-run
+
+docker-stop:
+	docker stop scraper && docker rm scraper
+
 db-refresh:
 	rm -rf ./store.db && sqlite3 store.db < ./init.sql
 

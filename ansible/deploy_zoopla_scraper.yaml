@@ -39,3 +39,8 @@
       register: out
 
     - debug: var=out.stdout_lines
+
+    - name: Start the docker container API
+      shell:
+        cmd: make docker
+        chdir: /home/pi/zoopla_scraper
