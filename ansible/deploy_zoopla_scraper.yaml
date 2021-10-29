@@ -23,3 +23,19 @@
         minute: "0"
         hour: "8"
         job: "cd ${HOME}/zoopla_scraper && ./execute.sh >> ${HOME}/zoopla_scraper_cron.log 2>&1"
+
+    - name: Create the virtual env
+      shell:
+        cmd: make venv-create
+        chdir: /home/pi/zoopla_scraper
+      register: out
+
+    - debug: var=out.stdout_lines
+
+    - name: Install the dependencies in virtualenv
+      shell:
+        cmd: make venv-install-all
+        chdir: /home/pi/zoopla_scraper
+      register: out
+
+    - debug: var=out.stdout_lines
